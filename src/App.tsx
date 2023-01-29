@@ -1,25 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import InputField from './components/InputField';
+import DatetimeInputField from './components/DatetimeInputField';
 
 function App() {
+  const [cartValue, setCartValue] = useState(20);
+  const [deliveryDistance, setDeliveryDistance] = useState(2235);
+  const [numberOfItems, setNumberOfItems] = useState(4);
+  const [orderTime, setOrderTime] = useState('2023-04-25T15:10');
+
+  const handleCartValueChange = (value: number) => {
+    console.log(value)
+    setCartValue(value);
+  }
+
+  const handleDeliveryDistanceChange = (value: number) => {
+    console.log(value)
+    setDeliveryDistance(value);
+  }
+
+  const handleNumberOfItems = (value: number) => {
+    console.log(value)
+    setNumberOfItems(value);
+  }
+
+  const handleOrderTime = (value: string) => {
+    console.log(value)
+    setOrderTime(value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <InputField name='Cart Value' isInteger={false} value={cartValue} onChange={handleCartValueChange} symbol='€' />
+      <InputField name='Delivery Distance' isInteger={true} value={deliveryDistance} onChange={handleDeliveryDistanceChange} symbol='m' />
+      <InputField name='Number of Items' isInteger={true} value={numberOfItems} onChange={handleNumberOfItems } />
+      <DatetimeInputField name='Order Time' value={orderTime} onChange={handleOrderTime} />
+    </>
   );
 }
 
