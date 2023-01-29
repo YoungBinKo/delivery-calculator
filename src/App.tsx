@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import InputField from './components/InputField';
 import DatetimeInputField from './components/DatetimeInputField';
+import DeliveryPrice from './components/DeliveryPrice';
 
 function App() {
   const [cartValue, setCartValue] = useState(20);
@@ -36,6 +37,8 @@ function App() {
       <InputField name='Delivery Distance' isInteger={true} value={deliveryDistance} onChange={handleDeliveryDistanceChange} symbol='m' />
       <InputField name='Number of Items' isInteger={true} value={numberOfItems} onChange={handleNumberOfItems } />
       <DatetimeInputField name='Order Time' value={orderTime} onChange={handleOrderTime} />
+      <button>Calculate develiver price</button>
+      <DeliveryPrice cartValue={cartValue} deliveryDistance={deliveryDistance} numberOfItems={numberOfItems} orderTime={orderTime} />
     </>
   );
 }
