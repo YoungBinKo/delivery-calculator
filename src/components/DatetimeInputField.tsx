@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import '../App.css';
 
 interface Props {
   name: string;
@@ -16,7 +17,7 @@ export default function DatetimeInputField({ name, value, onChange }: Props) {
   };
 
   return (
-    <>
+    <div className='input-field'>
       <label htmlFor={name.replace(/\s/g,'')}>{name}</label>
       <input
         type="datetime-local"
@@ -24,6 +25,6 @@ export default function DatetimeInputField({ name, value, onChange }: Props) {
         value={inputValue}
         onChange={handleChange}
       />
-    </>
+    </div>
   )
 }

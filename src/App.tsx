@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import InputField from './components/InputField';
 import DatetimeInputField from './components/DatetimeInputField';
 import DeliveryPrice from './components/DeliveryPrice';
 
 function App() {
-  const [cartValue, setCartValue] = useState(20);
+  const [cartValue, setCartValue] = useState(10.7);
   const [deliveryDistance, setDeliveryDistance] = useState(2235);
   const [numberOfItems, setNumberOfItems] = useState(4);
   const [orderTime, setOrderTime] = useState('2023-04-25T15:10');
@@ -32,14 +31,14 @@ function App() {
   }
 
   return (
-    <>
-      <InputField name='Cart Value' isInteger={false} value={cartValue} onChange={handleCartValueChange} symbol='€' />
-      <InputField name='Delivery Distance' isInteger={true} value={deliveryDistance} onChange={handleDeliveryDistanceChange} symbol='m' />
-      <InputField name='Number of Items' isInteger={true} value={numberOfItems} onChange={handleNumberOfItems } />
+    <div className="app">
+      <h1>Delivery Fee Calculator</h1>
+      <InputField name='Cart Value' requireInteger={false} value={cartValue} onChange={handleCartValueChange} symbol='€' />
+      <InputField name='Delivery Distance' requireInteger={true} value={deliveryDistance} onChange={handleDeliveryDistanceChange} symbol='m' />
+      <InputField name='Number of Items' requireInteger={true} value={numberOfItems} onChange={handleNumberOfItems } />
       <DatetimeInputField name='Order Time' value={orderTime} onChange={handleOrderTime} />
-      <button>Calculate develiver price</button>
       <DeliveryPrice cartValue={cartValue} deliveryDistance={deliveryDistance} numberOfItems={numberOfItems} orderTime={orderTime} />
-    </>
+    </div>
   );
 }
 

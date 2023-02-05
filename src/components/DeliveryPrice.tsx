@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React from 'react'
+import '../App.css';
 
 interface Props {
   cartValue: number;
@@ -10,7 +11,7 @@ interface Props {
 export default function DeliveryPrice({cartValue, deliveryDistance, numberOfItems, orderTime}: Props) {
   let deliveryPrice = 0;
 
-  function isDuringFridayRush() {
+  function isDuringFridayRush() { // Friday rush defined as 3-7PM UTC
     const orderTimeInDate = new Date(orderTime);
     const day = orderTimeInDate.getUTCDay();
     const hour = orderTimeInDate.getUTCHours();
@@ -18,12 +19,12 @@ export default function DeliveryPrice({cartValue, deliveryDistance, numberOfItem
   }
   
   function calculateDeliveryPrice() {
-    if (cartValue < 10 ){
-      deliveryPrice = 10-cartValue
+    if (cartValue < 10 && cartValue > 0 ){
+      deliveryPrice = 10.0-cartValue
     }
     
     if (deliveryDistance <= 1000){
-      deliveryPrice += 2
+      deliveryPrice += 2.0
     } else {
       const additionalFee: number = Math.ceil((deliveryDistance-1000)/500);
       deliveryPrice += 2+additionalFee
@@ -42,12 +43,17 @@ export default function DeliveryPrice({cartValue, deliveryDistance, numberOfItem
     if (deliveryPrice>15) {
       deliveryPrice = 15
     }
+
+    if (cartValue >= 100) {
+      deliveryPrice = 0
+    }
+
     return deliveryPrice
   }
     
   return (
-    <div>
-      Delivery Price: { cartValue<=100? calculateDeliveryPrice():0 }
+    <div className='delivery-price'>
+      Delivery Price: { calculateDeliveryPrice().toFixed(2) }
       <span>€</span> 
     </div>
   )
